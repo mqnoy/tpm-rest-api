@@ -1,0 +1,13 @@
+APP_PORT=3000
+
+# MongoDB
+MONGO_URI=mongodb://admin:password@127.0.0.1:27017
+MONGO_DB_NAME=task_project
+
+MIGRATE_MODE=production
+MIGRATE_MONGO_URI=mongodb://admin:password@127.0.0.1:27017/task_project
+MIGRATE_MONGO_COLLECTION=migrations
+MIGRATE_CONFIG_PATH=./migrate
+MIGRATE_MIGRATIONS_PATH=./migrations
+MIGRATE_TEMPLATE_PATH=./migrations/template.ts
+MIGRATE_AUTOSYNC=false
