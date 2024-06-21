@@ -128,7 +128,7 @@ export const updateTask = async (payload: UpdatePayload<TaskPayload>) => {
     return composeTask(task)
 }
 
-export const deleteTask = async (payload: TaskDetailPayload) => {
+export const deleteTask = async (payload: TaskDetailPayload): Promise<void> => {
     const { id } = payload
 
     // determine task by id
