@@ -73,3 +73,11 @@ export const findTaskByStartTime = async (
         ],
     }).exec()
 }
+
+export const deleteTaskByProjectId = async (projectId: string): Promise<number> => {
+    const result = await Task.deleteMany({
+        project: { $eq: new Types.ObjectId(projectId) },
+    }).exec()
+
+    return result.deletedCount
+}

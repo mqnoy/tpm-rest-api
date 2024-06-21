@@ -84,7 +84,11 @@ export const deleteProject = async (payload: ProjectDetailPayload): Promise<void
         throw new HttpException(`project doesn't exist on database`, HttpStatus.NOT_FOUND)
     }
 
-    await projectRepository.deleteProjectById(project._id.toString())
+    const result = await projectRepository.deleteProjectById(project._id.toString())
+    if (result) {
+        // delete all task in project
+        await taskUseCase.deleteTaskByProjectId(project._id.toString())
+    }
 }
 
 export const createProjectTask = async (payload: ProjectTaskPayload): Promise<TaskResult> => {

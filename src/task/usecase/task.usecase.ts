@@ -161,3 +161,7 @@ export const markAsDoneTask = async (payload: TaskDetailPayload): Promise<TaskRe
     Object.assign(task, data)
     return composeTask(task)
 }
+
+export const deleteTaskByProjectId = async (projectId: string): Promise<void> => {
+    await taskRepository.deleteTaskByProjectId(projectId)
+}
