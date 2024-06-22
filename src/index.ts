@@ -43,34 +43,36 @@ async function main(): Promise<void> {
     const app = App()
 
     // Start server
-    const PORT = EnvConfig.appPort
-    const server = app.listen(PORT, () => {
-        console.debug(`Server running in port: ${PORT}`)
-    })
-
-    process.on('unhandledRejection', (reason, promise) => {
-        console.error('Unhandled Rejection at:', promise, 'reason:', reason)
-        mongoose.connection.close()
-        server.close(() => {
-            console.debug('Closed out remaining connections')
+    if (EnvConfig.deploymentEnv !== 'vercel') {
+        const PORT = EnvConfig.appPort
+        const server = app.listen(PORT, () => {
+            console.debug(`Server running in port: ${PORT}`)
         })
-    })
 
-    process.on('SIGTERM', () => {
-        console.debug('SIGTERM signal received.')
-        mongoose.connection.close()
-        server.close(() => {
-            console.debug('Closed out remaining connections')
+        process.on('unhandledRejection', (reason, promise) => {
+            console.error('Unhandled Rejection at:', promise, 'reason:', reason)
+            mongoose.connection.close()
+            server.close(() => {
+                console.debug('Closed out remaining connections')
+            })
         })
-    })
 
-    process.on('SIGINT', () => {
-        console.debug('SIGINT signal received.')
-        mongoose.connection.close()
-        server.close(() => {
-            console.debug('Closed out remaining connections')
+        process.on('SIGTERM', () => {
+            console.debug('SIGTERM signal received.')
+            mongoose.connection.close()
+            server.close(() => {
+                console.debug('Closed out remaining connections')
+            })
         })
-    })
+
+        process.on('SIGINT', () => {
+            console.debug('SIGINT signal received.')
+            mongoose.connection.close()
+            server.close(() => {
+                console.debug('Closed out remaining connections')
+            })
+        })
+    }
 }
 
 void main()

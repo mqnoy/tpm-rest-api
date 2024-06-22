@@ -2,6 +2,7 @@ import 'dotenv/config'
 
 export const EnvConfig = {
     appPort: Number(process.env.APP_PORT || '3000'),
+    deploymentEnv: process.env.DEPLOYMENT_ENV || 'production',
     MongoDB: {
         uri: process.env.MONGO_URI || '',
         dbName: process.env.MONGO_DB_NAME || 'task_project',
