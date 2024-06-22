@@ -11,9 +11,9 @@
     "build": "tsup src --clean --format cjs,esm --env.NODE_ENV production",
     "dev": "yarn dotenv -e .env  yarn ts-node src/index.ts --transpile-only",
     "start": "node dist/index.js",
-    "clean": "rm -rf dist && rm -rf api",
+    "clean": "rm -rf dist",
     "format": "prettier --config .prettierrc 'src/**/*.ts' --write",
-    "vercel-build": "tsup src --clean --format cjs --env.NODE_ENV production --env.DEPLOYMENT_ENV vercel --out-dir api"
+    "vercel-build": "tsup src --clean --format cjs --env.NODE_ENV production --env.DEPLOYMENT_ENV vercel --out-dir dist"
   },
   "dependencies": {
     "cors": "^2.8.5",
